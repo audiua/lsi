@@ -1,0 +1,64 @@
+{% extends '::base.html.twig' %}
+
+{% block header %}
+    {% include 'AppBundle:Partial:header.html.twig' %}
+{% endblock %}
+
+{% block flash %}
+    {% include 'AppBundle:Partial:flash.html.twig' %}
+{% endblock %}
+
+{% block main_sidebar %}
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="sidebar-menu">
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                        <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ url('app_shop_index') }}"><i class="fa fa-circle-o"></i> Shop</a></li>
+                        <li><a href="{{ url('app_shop_new') }}"><i class="fa fa-circle-o"></i> New</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+{% endblock %}
+
+{% block content_wrapper %}
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        {% block breadcrumbs %}
+            <section class="content-header">
+                <h1>{% block h1 %}{% endblock %}</h1>
+                {{ wo_render_breadcrumbs() }}
+            </section>
+        {% endblock %}
+        {% block content %}{% endblock %}
+    </div>
+    <!-- /.content-wrapper -->
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {# add editor scrips #}
+    {% if 'new' in app.request.requestUri or 'edit' in app.request.requestUri  %}
+        <script src="{{ asset('assets/vendor/AdminLTE/plugins/ckeditor/ckeditor.js') }}"></script>
+    {% endif %}
+
+    {% if 'index' in app.request.requestUri or 'show' in app.request.requestUri %}
+        <script src="{{ asset('assets/vendor/AdminLTE/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/AdminLTE/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
+    {% endif %}
+
+    <script src="{{ asset('bundles/app/js/app.js') }}"></script>
+{% endblock %}

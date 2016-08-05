@@ -1,0 +1,57 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block content %}
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table class="datatable table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>{{ "id"|trans }}</th>
+                                <th>{{ "name"|trans }}</th>
+                                <th>{{ "apiPath"|trans }}</th>
+                                <th>{{ "responceType"|trans }}</th>
+                                <th>{{ "responceRaw"|trans }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for shop in shops %}
+                                <tr>
+                                    <td>{{ shop.id }}</td>
+                                    <td>{{ shop.name }}</td>
+                                    <td>{{ shop.apiUrl }}</td>
+                                    <td>{{ shop.responceType }}</td>
+                                    <td>{{ shop.responceRaw }}</td>
+                                    <td>
+                                        <a href="{{ url('app_shop_show', { 'id': shop.id }) }}"
+                                                class="btn btn-default" title="{{ "Page info"|trans }}">
+                                            <i class="glyphicon glyphicon-eye-open"></i>
+                                        </a>
+                                        <a href="{{ url('app_shop_edit', { 'id': shop.id }) }}"
+                                                class="btn btn-default btn-info" title="{{ "Edit shop"|trans }}">
+                                            <i class="glyphicon glyphicon-edit"></i>
+                                        </a>
+                                        <a href="{{ url('app_shop_delete', { 'id': shop.id }) }}"
+                                                class="btn btn-default btn-danger" title="{{ "Delete shop"|trans }}">
+                                            <i class="glyphicon glyphicon-remove"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+{% endblock %}

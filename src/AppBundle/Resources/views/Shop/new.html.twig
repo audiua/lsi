@@ -1,0 +1,2 @@
+{% set h1 = "New shop"|trans ~ '- #' ~ shop.id  %}
+{% embed 'AppBundle:Partial:form.html.twig'  with {'form': form, 'h1': h1} %}{% endembed %}

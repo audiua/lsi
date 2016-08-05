@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Shop</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ shop.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ shop.name }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ shop.description }}</td>
+            </tr>
+            <tr>
+                <th>Api_url</th>
+                <td>{{ shop.apiurl }}</td>
+            </tr>
+            <tr>
+                <th>Responce_type</th>
+                <td>{{ shop.responcetype }}</td>
+            </tr>
+            <tr>
+                <th>Responce_raw</th>
+                <td>{{ shop.responceraw }}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{% if shop.createdAt %}{{ shop.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Updatedat</th>
+                <td>{% if shop.updatedAt %}{{ shop.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('shop_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('shop_edit', { 'id': shop.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

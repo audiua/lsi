@@ -1,0 +1,24 @@
+{
+  "name": "lsi.loc",
+  "homepage": "https://github.com/audiua/lsi",
+  "authors": [
+    "Kostia Tarnashynskyi <kostia.tarnashynskyi@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "2.2.4",
+    "AdminLTE": "admin-lte#^2.3.6",
+    "jquery-ui": "1.12",
+    "font-awesome": "4.6.3",
+    "Ionicons": "ionicons#^2.0.1"
+  }
+}
