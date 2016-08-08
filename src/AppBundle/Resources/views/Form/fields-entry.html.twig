@@ -1,0 +1,21 @@
+{% block _shop_fields_entry_label %}{% endblock %}
+{% block _shop_fields_entry_errors %}{% endblock %}
+
+{% block _shop_fields_entry_widget %}{% spaceless %}
+    <div class="col-lg-6 col-md-6 col-xs-12"{% if form.resultField.vars.value is empty %} id="shop_fields___name__"{% endif %}>
+        <a href="#" class="remove"><i class="fa fa-remove"></i></a>
+        <p>
+            {{ form_label(form.shopField) }}
+            {{ form_widget(form.shopField) }}
+
+            {{ form_label(form.resultField) }}
+            {{ form_widget(form.resultField) }}
+
+            {{ form_label(form.defaultValue) }}
+            {{ form_widget(form.defaultValue) }}
+
+            {{ form_label(form.description) }}
+            {{ form_widget(form.description) }}
+        </p>
+    </div>
+{% endspaceless %}{% endblock %}

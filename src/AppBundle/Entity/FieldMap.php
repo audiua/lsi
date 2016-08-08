@@ -32,7 +32,7 @@ class FieldMap
 
     /**
      * @ORM\ManyToOne(targetEntity="Shop", inversedBy="fields")
-     * @ORM\JoinColumn(name="shop_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="shop_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     private $shop;
 
@@ -41,7 +41,6 @@ class FieldMap
      *
      * @ORM\Column(name="shop_field", type="string", length=255, nullable=false)
      * @Assert\NotBlank()
-     * @Gedmo\Versioned
      */
     private $shopField;
 
@@ -50,9 +49,15 @@ class FieldMap
      *
      * @ORM\Column(name="result_field", type="string", length=255, nullable=false)
      * @Assert\NotBlank()
-     * @Gedmo\Versioned
      */
     private $resultField;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $defaultValue;
 
     /**
      * @var string
@@ -60,22 +65,6 @@ class FieldMap
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
-
-    /**
-     * @var \DateTime $createdAt
-     *
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="created_at",type="datetime")
-     */
-    private $createdAt;
-
-    /**
-     * @var \DateTime $updatedAt
-     *
-     * @Gedmo\Timestampable(on="update")
-     * @ORM\Column(name="updated_at",type="datetime")
-     */
-    private $updatedAt;
 
     /**
      * Get id
@@ -160,61 +149,13 @@ class FieldMap
     }
 
     /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return FieldMap
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return FieldMap
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get updatedAt
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
      * Set shop
      *
      * @param \AppBundle\Entity\Shop $shop
      *
      * @return FieldMap
      */
-    public function setShop(\AppBundle\Entity\Shop $shop)
+    public function setShop(\AppBundle\Entity\Shop $shop = null)
     {
         $this->shop = $shop;
 
@@ -229,5 +170,29 @@ class FieldMap
     public function getShop()
     {
         return $this->shop;
+    }
+
+    /**
+     * Set defaultValue
+     *
+     * @param string $defaultValue
+     *
+     * @return FieldMap
+     */
+    public function setDefaultValue($defaultValue)
+    {
+        $this->defaultValue = $defaultValue;
+
+        return $this;
+    }
+
+    /**
+     * Get defaultValue
+     *
+     * @return string
+     */
+    public function getDefaultValue()
+    {
+        return $this->defaultValue;
     }
 }

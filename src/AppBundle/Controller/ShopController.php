@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Shop;
 use AppBundle\Form\ShopType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
  * Shop controller.
@@ -28,8 +29,9 @@ class ShopController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $shops = $em->getRepository('AppBundle:Shop')->findAll();
+        $crons = $em->getRepository('AppBundle:Cron')->findShops();
 
-        return compact('shops');
+        return compact('shops', 'crons');
     }
 
     /**
@@ -52,7 +54,7 @@ class ShopController extends Controller
             $em->persist($shop);
             $em->flush();
 
-            return $this->redirectToRoute('app_shop_show', array('id' => $shop->getId()));
+            return $this->redirectToRoute('app_shop_index', array('id' => $shop->getId()));
         }
 
         return [
@@ -67,6 +69,7 @@ class ShopController extends Controller
      * @Route("/{id}", name="app_shop_show")
      * @param Request $request
      * @param Shop $shop
+     * @Template()
      * @Method("GET")
      * @return array
      */
@@ -84,6 +87,7 @@ class ShopController extends Controller
      * Displays a form to edit an existing Shop entity.
      *
      * @Route("/{id}/edit", name="app_shop_edit")
+     * @Template()
      * @param Request $request
      * @param Shop $shop
      * @Method({"GET", "POST"})
@@ -100,12 +104,12 @@ class ShopController extends Controller
             $em->persist($shop);
             $em->flush();
 
-            return $this->redirectToRoute('app_shop_edit', array('id' => $shop->getId()));
+            return $this->redirectToRoute('app_shop_index', array('id' => $shop->getId()));
         }
 
         return [
             'shop' => $shop,
-            'edit_form' => $editForm->createView(),
+            'form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ];
     }
@@ -127,7 +131,7 @@ class ShopController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('shop_index');
+        return $this->redirectToRoute('app_shop_index');
     }
 
     /**

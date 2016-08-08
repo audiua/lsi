@@ -29,23 +29,16 @@
                 <th>Responce_raw</th>
                 <td>{{ shop.responceraw }}</td>
             </tr>
-            <tr>
-                <th>Createdat</th>
-                <td>{% if shop.createdAt %}{{ shop.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Updatedat</th>
-                <td>{% if shop.updatedAt %}{{ shop.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
+
         </tbody>
     </table>
 
     <ul>
         <li>
-            <a href="{{ path('shop_index') }}">Back to the list</a>
+            <a href="{{ path('app_shop_index') }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('shop_edit', { 'id': shop.id }) }}">Edit</a>
+            <a href="{{ path('app_shop_edit', { 'id': shop.id }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}

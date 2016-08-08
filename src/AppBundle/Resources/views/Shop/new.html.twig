@@ -1,2 +1,60 @@
-{% set h1 = "New shop"|trans ~ '- #' ~ shop.id  %}
-{% embed 'AppBundle:Partial:form.html.twig'  with {'form': form, 'h1': h1} %}{% endembed %}
+{% extends 'AppBundle::layout.html.twig' %}
+{% block content %}
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        {% form_theme form with ['AppBundle:Form:conditions-entry.html.twig', 'AppBundle:Form:fields-entry.html.twig'] %}
+
+                        {{ form_start(form) }}
+
+                        <div class="row">
+                            <div class="col-md-6">{{ form_row(form.name) }}</div>
+                            <div class="col-md-6">{{ form_row(form.apiUrl) }}</div>
+                        </div>
+
+                        {{ form_row(form.description) }}
+                        {{ form_row(form.repeatTime) }}
+                        {{ form_row(form.responceType) }}
+                        {{ form_row(form.csvSeparator) }}
+                        {{ form_row(form.responceRaw) }}
+
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#fields">Fields</a></li>
+                            <li><a data-toggle="tab" href="#conditins">Conditins</a></li>
+
+                        </ul>
+                        <div class="tab-content">
+                            <div id="fields" class="tab-pane fade in active">
+                                <h3>Fields <span><a href="#" class="btn btn-info add-fields"> Add field</a></span></h3>
+                                <div class="form-group">
+                                    {{ form_errors(form.fields) }}
+                                    {{ form_widget(form.fields, { 'attr': {"data-index": form.fields.count, "data-type": "fields" } }) }}
+                                </div>
+                            </div>
+                            <div id="conditins" class="tab-pane fade">
+                                <h3>Conditins <span><a href="#" class="btn btn-info add-conditions"> Add condition</a></span></h3>
+                                <div class="form-group">
+                                    {{ form_errors(form.conditions) }}
+                                    {{ form_widget(form.conditions, { 'attr': {"data-index": form.conditions.count, "data-type": "conditions" } }) }}
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="clearfix"></div>
+                        {{ form_end(form) }}
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+{% endblock %}

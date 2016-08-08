@@ -68,30 +68,33 @@ class Shop
     private $responceRaw;
 
     /**
-     * @var \DateTime $createdAt
+     * @var string
      *
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="created_at",type="datetime")
+     * @ORM\Column(name="csv_separator", type="string", length=255, nullable=true)
      */
-    private $createdAt;
+    private $csvSeparator;
 
     /**
-     * @var \DateTime $updatedAt
-     *
-     * @Gedmo\Timestampable(on="update")
-     * @ORM\Column(name="updated_at",type="datetime")
+     * @var integer
+     * Default value 10m
+     * @ORM\Column(name="repeat_time", type="integer", nullable=false)
      */
-    private $updatedAt;
+    private $repeatTime = 600;
 
     /**
-     * @ORM\OneToMany(targetEntity="FieldMap", mappedBy="shop")
+     * @ORM\OneToMany(targetEntity="FieldMap", mappedBy="shop", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $fields;
 
     /**
-     * @ORM\OneToMany(targetEntity="ShopCondition", mappedBy="shop")
+     * @ORM\OneToMany(targetEntity="ShopCondition", mappedBy="shop", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $conditions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Cron", mappedBy="shop", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $crons;
 
 
     /**
@@ -223,60 +226,15 @@ class Shop
     {
         return $this->responceRaw;
     }
-
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return Shop
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return Shop
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get updatedAt
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
+    
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->fields = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->conditions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->crons = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -289,6 +247,7 @@ class Shop
     public function addField(\AppBundle\Entity\FieldMap $field)
     {
         $this->fields[] = $field;
+        $field->setShop($this);
 
         return $this;
     }
@@ -301,6 +260,7 @@ class Shop
     public function removeField(\AppBundle\Entity\FieldMap $field)
     {
         $this->fields->removeElement($field);
+        $field->setShop(null);
     }
 
     /**
@@ -323,6 +283,7 @@ class Shop
     public function addCondition(\AppBundle\Entity\ShopCondition $condition)
     {
         $this->conditions[] = $condition;
+        $condition->setShop($this);
 
         return $this;
     }
@@ -335,6 +296,7 @@ class Shop
     public function removeCondition(\AppBundle\Entity\ShopCondition $condition)
     {
         $this->conditions->removeElement($condition);
+        $condition->setShop(null);
     }
 
     /**
@@ -345,5 +307,89 @@ class Shop
     public function getConditions()
     {
         return $this->conditions;
+    }
+
+    /**
+     * Set repeatTime
+     *
+     * @param string $repeatTime
+     *
+     * @return Shop
+     */
+    public function setRepeatTime($repeatTime)
+    {
+        $this->repeatTime = $repeatTime;
+
+        return $this;
+    }
+
+    /**
+     * Get repeatTime
+     *
+     * @return integer
+     */
+    public function getRepeatTime()
+    {
+        return $this->repeatTime;
+    }
+
+    /**
+     * Add cron
+     *
+     * @param \AppBundle\Entity\Cron $cron
+     *
+     * @return Shop
+     */
+    public function addCron(\AppBundle\Entity\Cron $cron)
+    {
+        $this->crons[] = $cron;
+        $cron->setShop($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove cron
+     *
+     * @param \AppBundle\Entity\Cron $cron
+     */
+    public function removeCron(\AppBundle\Entity\Cron $cron)
+    {
+        $this->crons->removeElement($cron);
+        $cron->setShop(null);
+    }
+
+    /**
+     * Get crons
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCrons()
+    {
+        return $this->crons;
+    }
+
+    /**
+     * Set csvSeparator
+     *
+     * @param string $csvSeparator
+     *
+     * @return Shop
+     */
+    public function setCsvSeparator($csvSeparator)
+    {
+        $this->csvSeparator = $csvSeparator;
+
+        return $this;
+    }
+
+    /**
+     * Get csvSeparator
+     *
+     * @return string
+     */
+    public function getCsvSeparator()
+    {
+        return $this->csvSeparator;
     }
 }

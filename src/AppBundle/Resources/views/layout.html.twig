@@ -17,15 +17,20 @@
             <ul class="sidebar-menu">
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                        <i class="fa fa-dashboard"></i> <span>Shop</span>
                         <span class="pull-right-container">
                           <i class="fa fa-angle-left pull-right"></i>
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ url('app_shop_index') }}"><i class="fa fa-circle-o"></i> Shop</a></li>
+                        <li><a href="{{ url('app_shop_index') }}"><i class="fa fa-circle-o"></i> List</a></li>
                         <li><a href="{{ url('app_shop_new') }}"><i class="fa fa-circle-o"></i> New</a></li>
                     </ul>
+                </li>
+                <li>
+                    <a href="/cron-manager" target="_blank">
+                        <i class="fa fa-dashboard"></i> <span>CronTab</span>
+                    </a>
                 </li>
             </ul>
         </section>
@@ -52,13 +57,12 @@
 
     {# add editor scrips #}
     {% if 'new' in app.request.requestUri or 'edit' in app.request.requestUri  %}
-        <script src="{{ asset('assets/vendor/AdminLTE/plugins/ckeditor/ckeditor.js') }}"></script>
+        <script src="{{ asset('/assets/vendor/AdminLTE/plugins/ckeditor/ckeditor.js') }}"></script>
+        <script src="{{ asset('/bundles/app/js/collection_type.js') }}"></script>
     {% endif %}
 
-    {% if 'index' in app.request.requestUri or 'show' in app.request.requestUri %}
-        <script src="{{ asset('assets/vendor/AdminLTE/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/AdminLTE/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
-    {% endif %}
 
-    <script src="{{ asset('bundles/app/js/app.js') }}"></script>
+    <script src="{{ asset('/assets/vendor/AdminLTE/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('/assets/vendor/AdminLTE/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('/bundles/app/js/app.js') }}"></script>
 {% endblock %}

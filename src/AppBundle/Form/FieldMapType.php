@@ -3,8 +3,10 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,12 +19,16 @@ class FieldMapType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('shopField')
+            ->add('shopField', TextType::class, [
+                'label' => 'ShopAPI field'
+            ])
             ->add('resultField')
+            ->add('defaultValue', TextType::class, [
+                'label' => 'Default Value',
+                'required' => false,
+            ])
             ->add('description', TextareaType::class, [
-                'attr' => [
-                    'class' => 'ckeditor'
-                ]
+                'required' => false,
             ])
         ;
     }
@@ -33,7 +39,7 @@ class FieldMapType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Shop'
+            'data_class' => 'AppBundle\Entity\FieldMap'
         ));
     }
 }

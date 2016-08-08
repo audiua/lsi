@@ -1,0 +1,24 @@
+{% block _shop_conditions_entry_label %}{% endblock %}
+{% block _shop_conditions_entry_errors %}{% endblock %}
+
+{% block _shop_conditions_entry_widget %}{% spaceless %}
+    <div class="col-lg-6 col-md-6 col-xs-12"{% if form.leftValue.vars.value is empty %} id="shop_conditions___name__"{% endif %}>
+        <a href="#" class="remove"><i class="fa fa-remove"></i></a>
+        <p>
+            {{ form_label(form.leftValue) }}
+            {{ form_widget(form.leftValue) }}
+
+            {{ form_label(form.operator) }}
+            {{ form_widget(form.operator) }}
+
+            {{ form_label(form.rigthValue) }}
+            {{ form_widget(form.rigthValue) }}
+
+            {{ form_label(form.endOperator) }}
+            {{ form_widget(form.endOperator) }}
+
+            {{ form_label(form.description) }}
+            {{ form_widget(form.description) }}
+        </p>
+    </div>
+{% endspaceless %}{% endblock %}

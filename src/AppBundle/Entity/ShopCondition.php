@@ -31,7 +31,7 @@ class ShopCondition
 
     /**
      * @ORM\ManyToOne(targetEntity="Shop", inversedBy="conditions")
-     * @ORM\JoinColumn(name="shop_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="shop_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     private $shop;
 
@@ -70,35 +70,18 @@ class ShopCondition
      * @var string
      *
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\NotBlank()
      */
     private $endOperator;
 
     /**
      * @var integer
      *
-     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\Column(type="integer", nullable=true)
      * @Assert\NotBlank()
      * @Gedmo\Sortable()
      */
     private $sort;
-
-    /**
-     * @var \DateTime $createdAt
-     *
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="created_at", type="datetime")
-     *
-     */
-    private $createdAt;
-
-    /**
-     * @var \DateTime $updatedAt
-     *
-     * @Gedmo\Timestampable(on="update")
-     * @ORM\Column(name="updated_at", type="datetime")
-     */
-    private $updatedAt;
+    
 
     /**
      * Get id
@@ -255,61 +238,12 @@ class ShopCondition
     }
 
     /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return ShopCondition
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return ShopCondition
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get updatedAt
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
      * Set shop
      *
      * @param \AppBundle\Entity\Shop $shop
-     *
      * @return ShopCondition
      */
-    public function setShop(\AppBundle\Entity\Shop $shop)
+    public function setShop(\AppBundle\Entity\Shop $shop = null)
     {
         $this->shop = $shop;
 

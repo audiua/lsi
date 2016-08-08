@@ -27,6 +27,11 @@ Update database schema
 php bin/console doctrine:schema:update --force
 ```
 
+Web assets
+```
+php bin/console assets:install
+```
+
 Performance issues?
 --------------
 Use php7 (5.5+ highly recommended), disable xdebug and set this variable in your php.ini.

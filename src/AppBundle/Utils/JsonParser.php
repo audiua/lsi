@@ -12,7 +12,7 @@ namespace AppBundle\Utils;
  * Class JsonParser
  * @package AppBundle\Utils
  */
-class JsonParser implements ParserInterface
+class JsonParser
 {
     /**
      * @param array $fields

@@ -6,6 +6,7 @@ use AppBundle\Entity\FieldMap;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -26,11 +27,19 @@ class ShopType extends AbstractType
                 ]
             ])
             ->add('apiUrl')
+            ->add('repeatTime')
             ->add('responceType', ChoiceType::class, [
                 'choices' => [
                     'xml'=> 'xml',
-                    'csv'=> 'csx',
+                    'csv'=> 'csv',
                     'json'=> 'json'
+                ]
+            ])
+            ->add('csvSeparator', ChoiceType::class, [
+                'choices' => [
+                    ',' => ',',
+                    ';' => ';',
+                    'Tab' => '\t'
                 ]
             ])
             ->add('responceRaw')
@@ -50,6 +59,11 @@ class ShopType extends AbstractType
                 'allow_delete' => true,
                 'by_reference' => false,
             ])
+            ->add('submit', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-success'
+                ]
+            ])
         ;
     }
     
@@ -62,4 +76,7 @@ class ShopType extends AbstractType
             'data_class' => 'AppBundle\Entity\Shop'
         ));
     }
+
+    //todo add result fields in new form as fields
+    //$em->getClassMetadata('AppBundle:Result')->getFieldNames();
 }
