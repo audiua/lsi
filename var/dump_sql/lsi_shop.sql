@@ -1,0 +1,2 @@
+INSERT INTO lsi.shop (name, description, api_url, responce_type, responce_raw, repeat_time, csv_separator) VALUES ('ebay', '<p>ebay shop</p>', 'http://shkolyar.info', 'csv', 'c,v,s', 0, '\\t');
+INSERT INTO lsi.shop (name, description, api_url, responce_type, responce_raw, repeat_time, csv_separator) VALUES ('rozetka', '<p>vdfvdfv</p>', 'rozetka/api', 'xml', 'dfvdfvdfv', 0, ',');

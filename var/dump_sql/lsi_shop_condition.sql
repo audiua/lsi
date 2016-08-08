@@ -1,0 +1,2 @@
+INSERT INTO lsi.shop_condition (shop_id, description, left_value, operator, rigth_value, end_operator, sort) VALUES (11, 'fbfgbfgb', 'currency', '=', 'USD', null, null);
+INSERT INTO lsi.shop_condition (shop_id, description, left_value, operator, rigth_value, end_operator, sort) VALUES (10, null, 'Event Type', '=', 'Winning Bid (Revenue)', null, null);

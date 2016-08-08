@@ -4,6 +4,7 @@ gi/app/config/parameters.yml
 .idea
 /var/*
 !/var/api_data
+!/var/dump_sql
 !/var/cache
 /var/cache/*
 !var/cache/.gitkeep

@@ -1,0 +1,10 @@
+INSERT INTO lsi.field_map (shop_id, shop_field, result_field, description, created_at, updated_at, default_value) VALUES (10, 'Unique Transaction ID', 'orderId', 'orderId', null, null, null);
+INSERT INTO lsi.field_map (shop_id, shop_field, result_field, description, created_at, updated_at, default_value) VALUES (11, 'currency', 'currency', 'currency', null, null, null);
+INSERT INTO lsi.field_map (shop_id, shop_field, result_field, description, created_at, updated_at, default_value) VALUES (11, 'action_date', 'orderedAt', 'orderedAt', null, null, null);
+INSERT INTO lsi.field_map (shop_id, shop_field, result_field, description, created_at, updated_at, default_value) VALUES (11, 'cart', 'total', 'total', null, null, null);
+INSERT INTO lsi.field_map (shop_id, shop_field, result_field, description, created_at, updated_at, default_value) VALUES (11, 'advcampaign_id', 'orderId', 'orderId', null, null, null);
+INSERT INTO lsi.field_map (shop_id, shop_field, result_field, description, created_at, updated_at, default_value) VALUES (11, 'status', 'status', 'status', null, null, null);
+INSERT INTO lsi.field_map (shop_id, shop_field, result_field, description, created_at, updated_at, default_value) VALUES (10, 'currency', 'currency', 'currency', null, null, 'USD');
+INSERT INTO lsi.field_map (shop_id, shop_field, result_field, description, created_at, updated_at, default_value) VALUES (10, 'Click Timestamp', 'orderedAt', 'orderedAt', null, null, null);
+INSERT INTO lsi.field_map (shop_id, shop_field, result_field, description, created_at, updated_at, default_value) VALUES (10, 'eBay Total Sale Amount', 'total', 'total', null, null, null);
+INSERT INTO lsi.field_map (shop_id, shop_field, result_field, description, created_at, updated_at, default_value) VALUES (10, 'status', 'status', null, null, null, 'appreved');
