@@ -13,8 +13,18 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 
+/**
+ * Class CronCommand
+ * Основная комманда запуска парсеров магазинов
+ * !ВАЖНО! Выполняет асинхронный запуск всех комманд парсеров
+ * @package AppBundle\Command
+ */
 class CronCommand extends Command
 {
+    /**
+     * configure command
+     * @return void
+     */
     protected function configure()
     {
         $this
@@ -24,6 +34,10 @@ class CronCommand extends Command
         ;
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $kernel = $this->getApplication()
@@ -48,7 +62,7 @@ class CronCommand extends Command
             ]);
 
             // последовательно
-//            $parser = new ApiParser($container, $shop);
+            // $parser = new ApiParser($container, $shop);
 
             // асинхронно
             exec('/usr/bin/php '.$kernel->getRootDir().'/../bin/console app:parser ' . escapeshellcmd($shop->getId()) . ' > /dev/null 2>&1 &');

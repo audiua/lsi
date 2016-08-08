@@ -31,6 +31,9 @@ class ApiParser
      */
     private $shop;
 
+    /**
+     * @var
+     */
     private $parser;
 
     /**
@@ -48,47 +51,67 @@ class ApiParser
 
         $this->run();
     }
-    
+
+    /**
+     * Выполнение парсинга ответа магазина
+     */
     public function run()
     {
-
         // todo переделать на проверку заголовков
         if ($shopApiData = $this->getApiData($this->shop->getResponceType())) {
-
-//            dump($shopApiData);
-//            die();
-
-            // получили ответ от магазина, сохранение крон логов
-            $cron = new Cron();
-            $cron->setShop($this->shop);
-            $cron->setCreatedAt(time());
-            $this->em->persist($cron);
-            $this->em->flush();
+            $this->saveCronExecute();
 
             // парсинг ответа магазина
             $this->parser->setRawData($shopApiData);
             $neededFields = $this->parser->getMappingFields();
             if ($neededFields) {
-                foreach ($neededFields as $field) {
-                    $cron = new Result();
-                    $cron->setShop($this->shop);
-                    $cron->setOrderId($field['orderId']);
-                    $cron->setStatus($field['status']);
-                    $cron->setCurrency($field['currency']);
-                    $cron->setTotal($field['total']);
-                    $cron->setOrderedAt($field['orderedAt']);
-                    $this->em->persist($cron);
+                foreach ($neededFields as $fields) {
+                    $this->saveResultShopData($fields);
                 }
                 $this->em->flush();
             }
         }
     }
 
+    /**
+     * Выполнение запроса по апи(на даном этапе чтение данных с файлов - var/api_data)
+     * @param $type
+     * @return mixed
+     */
     protected function getApiData($type)
     {
-        //todo переделать под Guzzle фреймворк
+        //todo will do with Guzzle framework
 //        return file_get_contents($this->shop->getApiUrl());
         return file_get_contents($this->di->get('kernel')->getRootDir() . "/../var/api_data/data.{$type}");
     }
+
+    /**
+     * Сохранение выполнения парсинга по крону для магазина
+     * @return vaid
+     */
+    private function saveCronExecute()
+    {
+        $cron = new Cron();
+        $cron->setShop($this->shop);
+        $cron->setCreatedAt(time());
+        $this->em->persist($cron);
+        $this->em->flush();
+    }
+
+    /**
+     * @param $fields
+     */
+    private function saveResultShopData($fields)
+    {
+        $cron = new Result();
+        $cron->setShop($this->shop);
+        $cron->setOrderId($fields['orderId']);
+        $cron->setStatus($fields['status']);
+        $cron->setCurrency($fields['currency']);
+        $cron->setTotal($fields['total']);
+        $cron->setOrderedAt($fields['orderedAt']);
+        $this->em->persist($cron);
+    }
+
 
 }

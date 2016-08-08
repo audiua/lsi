@@ -1,37 +1,46 @@
-{% extends 'base.html.twig' %}
+{% extends 'AppBundle::layout.html.twig' %}
 
-{% block body %}
-    <h1>Shop</h1>
+{% block content %}
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="datatable table table-bordered table-hover">
+                        <tbody>
+                            <tr>
+                                <th>Id</th>
+                                <td>{{ shop.id }}</td>
+                            </tr>
+                            <tr>
+                                <th>Name</th>
+                                <td>{{ shop.name }}</td>
+                            </tr>
+                            <tr>
+                                <th>Description</th>
+                                <td>{{ shop.description }}</td>
+                            </tr>
+                            <tr>
+                                <th>Api_url</th>
+                                <td>{{ shop.apiurl }}</td>
+                            </tr>
+                            <tr>
+                                <th>Responce_type</th>
+                                <td>{{ shop.responcetype }}</td>
+                            </tr>
+                            <tr>
+                                <th>Responce_raw</th>
+                                <td>{{ shop.responceraw }}</td>
+                            </tr>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ shop.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ shop.name }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ shop.description }}</td>
-            </tr>
-            <tr>
-                <th>Api_url</th>
-                <td>{{ shop.apiurl }}</td>
-            </tr>
-            <tr>
-                <th>Responce_type</th>
-                <td>{{ shop.responcetype }}</td>
-            </tr>
-            <tr>
-                <th>Responce_raw</th>
-                <td>{{ shop.responceraw }}</td>
-            </tr>
-
-        </tbody>
-    </table>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <ul>
         <li>
@@ -46,4 +55,5 @@
             {{ form_end(delete_form) }}
         </li>
     </ul>
+</section>
 {% endblock %}

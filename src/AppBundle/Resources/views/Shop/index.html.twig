@@ -8,14 +8,18 @@
                 <div class="box">
                     <!-- /.box-header -->
                     <div class="box-body">
+
+
                         <table class="datatable table table-bordered table-hover">
                             <thead>
                             <tr>
                                 <th>{{ "id"|trans }}</th>
                                 <th>{{ "name"|trans }}</th>
                                 <th>{{ "apiPath"|trans }}</th>
+                                <th>{{ "repeatTime(sec)"|trans }}</th>
                                 <th>{{ "responceType"|trans }}</th>
                                 <th>{{ "responceRaw"|trans }}</th>
+                                <th>{{ "action"|trans }}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -24,6 +28,7 @@
                                     <td>{{ shop.id }}</td>
                                     <td>{{ shop.name }}</td>
                                     <td>{{ shop.apiUrl }}</td>
+                                    <td>{{ shop.repeatTime }}</td>
                                     <td>{{ shop.responceType }}</td>
                                     <td>{{ shop.responceRaw }}</td>
                                     <td>

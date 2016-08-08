@@ -24,14 +24,14 @@ class ShopController extends Controller
      * @Route("/", name="app_shop_index")
      * @Template()
      * @Method("GET")
+     * @return array
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
         $shops = $em->getRepository('AppBundle:Shop')->findAll();
-        $crons = $em->getRepository('AppBundle:Cron')->findShops();
 
-        return compact('shops', 'crons');
+        return compact('shops');
     }
 
     /**
@@ -53,6 +53,11 @@ class ShopController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($shop);
             $em->flush();
+
+            $this->addFlash(
+                'success',
+                "Shop with ID#{$shop->getId()} was successfull saved!"
+            );
 
             return $this->redirectToRoute('app_shop_index', array('id' => $shop->getId()));
         }
@@ -103,6 +108,11 @@ class ShopController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($shop);
             $em->flush();
+
+            $this->addFlash(
+                'success',
+                "Shop with ID#{$shop->getId()} was successfull edited!"
+            );
 
             return $this->redirectToRoute('app_shop_index', array('id' => $shop->getId()));
         }

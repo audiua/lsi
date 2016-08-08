@@ -15,14 +15,16 @@ namespace AppBundle\Utils;
 class XmlParser extends Parser
 {
     /**
+     * Получение данных из апи и маппинг их с нужными полями из рузльтирующей таблицы для сохранения
      * @return array
      */
     public function getMappingFields(){
         $neededFields = [];
         $xml = simplexml_load_string($this->rawData);
-        
+
+        // индекс не числовой
         $i = 0;
-        foreach($xml as $item){
+        foreach ($xml as $item) {
 
             if (!$this->checkConditions($item)) {
                 continue;
@@ -36,6 +38,7 @@ class XmlParser extends Parser
                 }
 
                 $shopField = $field['shopField'];
+                // на случай если нет узла
                 try{
                     $neededFields[$i][$field['resultField']] = (string)$item->$shopField;
                 } catch (\Exception $e) {
@@ -48,6 +51,4 @@ class XmlParser extends Parser
 
         return $neededFields;
     }
-
-
 }

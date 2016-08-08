@@ -77,6 +77,6 @@ class ShopType extends AbstractType
         ));
     }
 
-    //todo add result fields in new form as fields
+    //todo add result fields in new form as required fields
     //$em->getClassMetadata('AppBundle:Result')->getFieldNames();
 }

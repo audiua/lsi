@@ -45,8 +45,15 @@
             <section class="content-header">
                 <h1>{% block h1 %}{% endblock %}</h1>
                 {{ wo_render_breadcrumbs() }}
+
+                {% for flash_message in app.session.flashBag.get('success') %}
+                    <div class="flash-success">
+                        {{ flash_message }}
+                    </div>
+                {% endfor %}
             </section>
         {% endblock %}
+
         {% block content %}{% endblock %}
     </div>
     <!-- /.content-wrapper -->

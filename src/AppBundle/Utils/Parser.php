@@ -7,27 +7,54 @@
 
 namespace AppBundle\Utils;
 
+/**
+ * Класс парсинга, включающий общие свойства и методы для отнаследованных персеров
+ * Class Parser
+ * @package AppBundle\Utils
+ */
 class Parser
 {
+    /**
+     * @var obj
+     */
     protected $shop;
-    protected $di;
-    protected $mappingFields;
-    protected $conditions;
-    protected $rawData;
 
+    /**
+     * @var obj
+     */
+    protected $di;
+
+    /**
+     * @var array
+     */
+    protected $mappingFields = [];
+
+    /**
+     * @var array
+     */
+    protected $conditions = [];
+
+    /**
+     * @var mixed
+     */
+    protected $rawData = '';
+
+    /**
+     * Parser constructor.
+     * @param $di
+     * @param $shop
+     */
     public function __construct($di, $shop)
     {
         $this->di = $di;
         $this->shop = $shop;
-        foreach($shop->getFields() as $field){
-
+        foreach ($shop->getFields() as $field) {
             $this->mappingFields[] = [
                 'shopField' => $field->getShopField(),
                 'resultField' => $field->getResultField(),
                 'defaultValue' => $field->getDefaultValue(),
             ];
         }
-
 
         foreach ($shop->getConditions() as $condition) {
             $this->conditions[] = [
@@ -36,18 +63,19 @@ class Parser
                 'rigthValue' => $condition->getRigthValue()
             ];
         }
-
-        if(!$this->conditions){
-            $this->conditions = [];
-        }
     }
 
+    /**
+     * setter
+     * @param $data
+     */
     public function setRawData($data)
     {
         $this->rawData = $data;
     }
 
     /**
+     * Проверка условий / будет отдельная реализация в дочерних классах
      * @param $item xml obj
      * @return bool
      */

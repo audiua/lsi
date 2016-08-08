@@ -7,18 +7,18 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class DashboardController
+ * @package AppBundle\Controller
+ */
 class DashboardController extends Controller
 {
     /**
      * @Route("/", name="app_dashboard_index")
-     * @Template()
      * @param Request $request
-     * @return array
      */
     public function indexAction(Request $request)
     {
-        return [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..'),
-        ];
+        return $this->redirectToRoute('app_shop_index');
     }
 }

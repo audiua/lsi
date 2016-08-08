@@ -15,33 +15,33 @@ namespace AppBundle\Utils;
 class CsvParser extends Parser
 {
     /**
+     * Получение данных из апи и маппинг их с нужными полями из рузльтирующей таблицы для сохранения
      * @return array
      */
-    public function getMappingFields(){
-        
+    public function getMappingFields()
+    {
         $neededFields = [];
+        // по строкам
         $csv = str_getcsv($this->rawData, "\n");
-        //todo getSeparator from shop
+        // по полям
+        //todo переделать под разделитель из настроек магазина
         $csvTitle = str_getcsv(array_shift($csv), "\t");
         foreach ($csv as &$row) {
             $row = array_combine($csvTitle, str_getcsv($row, "\t"));
         }
 
-        $i = 0;
-        foreach($csv as $item){
-
-            if(!$this->checkConditions($item)){
+        foreach ($csv as $i => $item) {
+            if (!$this->checkConditions($item)) {
                 continue;
             }
-            
             foreach ($this->mappingFields as $field) {
                 // поля с дефолтным значение не парсим
                 if ($field['defaultValue']) {
                     $neededFields[$i][$field['resultField']] = $field['defaultValue'];
                     continue;
                 }
-
                 $shopField = $field['shopField'];
+                // на случай если нет такого поля
                 try{
                     $neededFields[$i][$field['resultField']] = $item[$shopField];
                 } catch (\Exception $e) {
@@ -49,17 +49,14 @@ class CsvParser extends Parser
                     continue;
                 }
             }
-
-
-
-            $i++;
         }
 
         return $neededFields;
     }
 
     /**
-     * @param $item xml obj
+     * Проверка условий для полей магазина
+     * @param $item array
      * @return bool
      */
     public function checkConditions($item)

@@ -18,6 +18,6 @@ class JsonParser
      * @param array $fields
      */
     public function getMappingFields(array $fields){
-        return;
+        return $fields;
     }
 }

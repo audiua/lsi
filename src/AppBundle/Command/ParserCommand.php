@@ -16,10 +16,15 @@ use AppBundle\Utils\ApiParser;
 
 /**
  * Class ParserCommand
+ * Комманда парсинга апи магазина
  * @package AppBundle\Command
  */
 class ParserCommand extends Command
 {
+    /**
+     * configure command
+     * @return void
+     */
     protected function configure()
     {
         $this
@@ -30,6 +35,10 @@ class ParserCommand extends Command
         ;
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
 
@@ -50,9 +59,15 @@ class ParserCommand extends Command
             '============',
             '',
         ]);
-        
-        $parser = new ApiParser($container, $shop);
-        $parser->run();
+
+        // выполнение парсинга
+        try{
+            $parser = new ApiParser($container, $shop);
+            $parser->run();
+        } catch(\Exception $e) {
+            //todo monolog errors
+            echo $e->getMessage();
+        }
 
         $output->writeln([
             'End shop parsing - '. $shop->getName(),
