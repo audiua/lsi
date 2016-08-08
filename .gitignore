@@ -3,6 +3,7 @@ gi/app/config/parameters.yml
 /phpunit.xml
 .idea
 /var/*
+*~
 !/var/api_data
 !/var/dump_sql
 !/var/cache
