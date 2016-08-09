@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class FieldMap
- *
+ * todo unig shop + shopField + resultField
  * @ORM\Entity()
  * @ORM\Table(name="field_map")
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\FieldMapRepository")

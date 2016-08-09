@@ -5,7 +5,8 @@ gi/app/config/parameters.yml
 /var/*
 *~
 !/var/api_data
-!/var/dump_sql
+/app/config/parameters.yml
+!/var/dump
 !/var/cache
 /var/cache/*
 !var/cache/.gitkeep
